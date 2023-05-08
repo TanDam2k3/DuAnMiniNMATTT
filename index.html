@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="java.js"></script>
+    <script src="jquery-3.6.4.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Khái niệm hàm băm -->
+        <div class="row" style="margin: 50px 0;">
+            <div class="col-12">
+                <h1 class="title" style="text-align: center;">Hàm băm là gì?</h1>
+                <p class="text-align-justify text">Hàm băm (hash function) là một loại hàm số toán học đơn giản, nhận đầu vào là một chuỗi dữ liệu bất kỳ (có thể là một file, một message, một password,...) và trả về một chuỗi số nguyên có độ dài cố định (thường được gọi là giá trị băm hay hash value). Mục đích của hàm băm là ánh xạ dữ liệu đầu vào thành một giá trị số học có độ dài cố định, với các đặc tính như: <br>
+                    <b>-Độ tin cậy cao:</b> Dữ liệu đầu vào khác nhau sẽ trả về giá trị băm khác nhau (trừ trường hợp va chạm - collision), đảm bảo tính độc lập giữa các dữ liệu. <br>
+                    <b>-Không thể phục hồi được:</b> Không thể dùng giá trị băm để suy ra dữ liệu đầu vào ban đầu (nghĩa là nếu biết giá trị băm, thì rất khó khăn để tìm ra dữ liệu ban đầu). <br>
+                    <b>-Tính nhanh và hiệu quả:</b> Hàm băm thường có thể tính toán nhanh chóng với các giá trị đầu vào có kích thước lớn. <br>
+                    Hàm băm được sử dụng rộng rãi trong các ứng dụng bảo mật, như xác thực mật khẩu, chứng thực dữ liệu, mã hóa thông tin, và trong blockchain để tạo ra các khối và xác minh tính chính xác của dữ liệu.</p>
+            </div>
+        </div>
+
+
+        <div class="row" style="margin: 50px 0;">
+            <div class="col-12">
+                <h2 class="list">Một số hàm băm phổ biến được sử dụng trong các ứng dụng bảo mật:</h2>
+            </div>
+        </div>
+
+        <!-- MD5 -->
+        <div class="row" style="margin: 50px 0;">
+            <div class="col-12">
+                <h1 class="title" style="text-align: center;">MD5 Hash Calculator</h1>
+                <p class="text">Một trong những hàm băm đầu tiên được sử dụng rộng rãi, tạo ra giá trị băm có độ dài 128 bit.</p>
+                <label for="inputDataMD5" style="text-align: center;"><b>Input Data:</b></label>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="inputDataMD5" placeholder="Enter input data..." class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="btn btn-primary form-control" id="calculateButton" onclick="MD5calculateHash()"><b>Calculate Hash</b></div>
+                    </div>
+                </form>
+                <div id="resultMD5" class="text" style="text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- SHA-1 -->
+        <div class="row" style="margin: 50px 0;">
+            <div class="col-12">
+                <h1 class="title" style="text-align: center;">SHA-1 Hash Calculator</h1>
+                <p class="text">Hàm băm được sử dụng phổ biến, tạo ra giá trị băm có độ dài 160 bit.</p>
+                <label for="inputDataSHA1" style="text-align: center;"><b>Input Data:</b></label>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="inputDataSHA1" placeholder="Enter input data..." class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="btn btn-primary form-control" id="calculateButton" onclick="SHA1calculateHash()"><b>Calculate Hash</b></div>
+                    </div>
+                </form>
+                <div id="resultSHA1" class="text" style="text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- SHA-2 -->
+        <div class="row" style="margin: 50px 0;">
+            <div class="col-12">
+                <h1 class="title" style="text-align: center;">SHA-2 Hash Calculator</h1>
+                <p class="text">Bao gồm các hàm băm SHA-224, SHA-256, SHA-384 và SHA-512, tạo ra các giá trị băm có độ dài từ 224 đến 512 bit.</p>
+                <label for="inputDataSHA2" style="text-align: center;"><b>Input Data:</b></label>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="inputDataSHA2" placeholder="Enter input data..." class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="btn btn-primary form-control" id="calculateButton" onclick="SHA2calculateHash()"><b>Calculate Hash</b></div>
+                    </div>
+                </form>
+                <div id="resultSHA2" class="text" style="text-align: left;"></div>
+            </div>
+        </div>
+
+        <!-- SHA-3 -->
+        <div class="row" style="margin: 50px 0;">
+            <div class="col-12">
+                <h1 class="title" style="text-align: center;">SHA-3 Hash Calculator</h1>
+                <p class="text">Hàm băm mới nhất trong loạt các thuật toán SHA, tạo ra giá trị băm có độ dài từ 224 đến 512 bit.</p>
+                <label for="inputDataSHA3" style="text-align: center;"><b>Input Data:</b></label>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="inputDataSHA3" placeholder="Enter input data..." class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="btn btn-primary form-control" id="calculateButton" onclick="SHA3calculateHash()"><b>Calculate Hash</b></div>
+                    </div>
+                </form>
+                <div id="resultSHA3" class="text" style="text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- RIPEMD-160 -->
+        <div class="row" style="margin: 50px 0;">
+            <div class="col-12">
+                <h1 class="title" style="text-align: center;">RIPEMD-160 Hash Calculator</h1>
+                <p class="text">Một hàm băm được sử dụng trong các ứng dụng blockchain, tạo ra giá trị băm có độ dài 160 bit.</p>
+                <label for="inputDataRIPEMD160" style="text-align: center;"><b>Input Data:</b></label>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="inputDataRIPEMD160" placeholder="Enter input data..." class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="btn btn-primary form-control" id="calculateButton" onclick="RIPEMD160calculateHash()"><b>Calculate Hash</b></div>
+                    </div>
+                </form>
+                <div id="resultRIPEMD160" class="text" style="text-align: center;"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text" style="text-align: center;"><b>21039071 - Nguyễn Tấn Đãm</b></div>
+        </div>
+    </div>
+</body>
+</html>
