@@ -19,7 +19,7 @@ function SHA2calculateHash() {
     var hashValue1 = CryptoJS.SHA256(data).toString();
     var hashValue2 = CryptoJS.SHA384(data).toString();
     var hashValue3 = CryptoJS.SHA512(data).toString();
-    document.getElementById("resultSHA2").innerHTML - "";
+    document.getElementById("resultSHA2").innerHTML = "";
     document.getElementById('resultSHA2').innerHTML += `<p><b>Hash value 224:</b> ${hashValue}</p>`;
     document.getElementById('resultSHA2').innerHTML += `<p><b>Hash value 256:</b> ${hashValue1}</p>`;
     document.getElementById('resultSHA2').innerHTML += `<p><b>Hash value 385:</b> ${hashValue2}</p>`;
